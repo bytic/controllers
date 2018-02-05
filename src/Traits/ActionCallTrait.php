@@ -11,8 +11,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 trait ActionCallTrait
 {
-
-
     protected $action = null;
 
     /**
