@@ -2,7 +2,7 @@
 
 namespace Nip\Controllers\Tests;
 
-use Nip\Controller;
+use Nip\Controllers\Controller;
 
 /**
  * Class ControllerTest
