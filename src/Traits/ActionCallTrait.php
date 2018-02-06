@@ -14,55 +14,52 @@ trait ActionCallTrait
     protected $action = null;
 
     /**
-     * @param bool $action
+     * @param bool $method
+     * @param array $parameters
      * @return ResponseInterface
      */
-    public function callAction($action = false)
+    public function callAction($method = false, $parameters = [])
     {
+        if ($method) {
+            if ($this->validAction($method)) {
+                $this->setAction($method);
 
-        if ($action) {
-            if ($this->validAction($action)) {
-                $this->setAction($action);
-
-                $this->parseRequest();
-                $this->beforeAction();
-                $this->{$action}();
-                $this->afterAction();
-
-                return $this->getResponse();
+                return $this->runAction($method, $parameters);
             } else {
                 throw new NotFoundHttpException(
-                    'Controller method [' . $action . '] not found for ' . get_class($this)
+                    'Controller method ['.$method.'] not found for '.get_class($this)
                 );
             }
         }
 
-        throw new NotFoundHttpException('No action specified for ' . get_class($this));
+        throw new NotFoundHttpException('No action specified for '.get_class($this));
     }
 
     /**
-     * Called before action
+     * @param $method
+     * @param array $parameters
+     * @return ResponseInterface
      */
-    protected function parseRequest()
+    protected function runAction($method, $parameters = [])
     {
-        return true;
+        $this->callUtilityMethods('parseRequest');
+        $this->callUtilityMethods('beforeAction');
+        call_user_func_array([$this, $method], $parameters);
+        $this->callUtilityMethods('afterAction');
+
+        return $this->getResponse(true);
     }
 
     /**
-     * Called before $this->action
+     * @param $method
      */
-    protected function beforeAction()
+    protected function callUtilityMethods($method)
     {
-        return true;
+        if (method_exists($this, $method)) {
+            $this->{$method};
+        }
     }
 
-    /**
-     * Called after $this->action
-     */
-    protected function afterAction()
-    {
-        return true;
-    }
     /**
      * @param $action
      * @return bool
