@@ -44,8 +44,17 @@ trait ActionCallTrait
     {
         $this->callUtilityMethods('parseRequest');
         $this->callUtilityMethods('beforeAction');
-        call_user_func_array([$this, $method], $parameters);
+
+        $response = call_user_func_array([$this, $method], $parameters);
+        if ($response instanceof ResponseInterface) {
+            $this->setResponse($response);
+        }
+
         $this->callUtilityMethods('afterAction');
+
+        if ($this->hasResponse()) {
+            return $this->getResponse();
+        }
 
         return $this->getResponse(true);
     }
