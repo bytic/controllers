@@ -65,7 +65,7 @@ trait ActionCallTrait
     protected function callUtilityMethods($method)
     {
         if (method_exists($this, $method)) {
-            $this->{$method};
+            $this->{$method}();
         }
     }
 
