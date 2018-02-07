@@ -17,7 +17,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Nip\\Controllers\\Tests\\": "tests/"
+      "Nip\\Controllers\\Tests\\": "tests/",
+      "Nip\\Controllers\\Tests\\Fixtres\\": "tests/fixtures"
     }
   },
   "require": {

@@ -1,15 +1,19 @@
 <?php
 
-namespace Nip\Controllers\Tests;
+namespace Nip\Controllers\Tests\Helpers;
 
 use Nip\Controllers\Controller;
+use Nip\Controllers\Tests\AbstractTest;
+use Nip\Controllers\Tests\Fixtures\BaseControllerWithUtilityMethods;
+use Nip\Http\Response\Response;
 
 /**
- * Class ControllerTest
- * @package Nip\Tests
+ * Class ControllerHasHelpersTest
+ * @package Nip\Tests\Helpers
  */
-class ControllerTest extends AbstractTest
+class ControllerHasHelpersTest extends AbstractTest
 {
+
     public function testDynamicCallHelper()
     {
         $controller = new Controller();
