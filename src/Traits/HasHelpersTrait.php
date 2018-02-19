@@ -2,6 +2,8 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\HelperBroker;
+
 /**
  * Trait HasHelpersTrait
  * @package Nip\Controllers\Trait
