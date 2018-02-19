@@ -8,6 +8,7 @@ namespace Nip\Controllers\Traits;
  */
 trait DispatcherAwareTrait
 {
+    use \Nip\Dispatcher\DispatcherAwareTrait;
 
     /**
      * @param null|Request $request
