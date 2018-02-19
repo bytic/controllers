@@ -10,6 +10,19 @@ trait DispatcherAwareTrait
 {
 
     /**
+     * @param null|Request $request
+     *
+     * @return Response
+     */
+    public function dispatch($request = null)
+    {
+        $request = $request ? $request : $this->getRequest();
+        $this->populateFromRequest($request);
+
+        return $this->dispatchAction($request->getActionName());
+    }
+
+    /**
      * @param bool $action
      * @param bool $controller
      * @param bool $module

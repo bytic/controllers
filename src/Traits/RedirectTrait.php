@@ -2,6 +2,8 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip_Flash_Messages as FlashMessages;
+
 /**
  * Trait NameWorksTrait
  * @package Nip\Controllers\Traits
@@ -13,12 +15,12 @@ trait RedirectTrait
      * @param $message
      * @param $url
      * @param string $type
-     * @param bool $name
+     * @param bool   $name
      */
     protected function flashRedirect($message, $url, $type = 'success', $name = false)
     {
         $name = $name ? $name : $this->getName();
-        app('flash.messages')->add($name, $type, $message);
+        FlashMessages::instance()->add($name, $type, $message);
         $this->redirect($url);
     }
 

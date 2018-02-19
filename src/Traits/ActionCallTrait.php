@@ -4,6 +4,7 @@ namespace Nip\Controllers\Traits;
 
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Nip\Dispatcher\Dispatcher;
 
 /**
  * Trait ActionCallTrait
@@ -12,6 +13,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 trait ActionCallTrait
 {
     protected $action = null;
+
+    /**
+     * @param bool $action
+     *
+     * @return Response
+     */
+    public function dispatchAction($action = false)
+    {
+        $action = Dispatcher::formatActionName($action);
+        return $this->callAction($action);
+    }
 
     /**
      * @param bool $method
@@ -48,7 +60,6 @@ trait ActionCallTrait
         $response = call_user_func_array([$this, $method], $parameters);
 
         if ($response instanceof ResponseInterface) {
-            var_dump($response);
             $this->setResponse($response);
         }
 

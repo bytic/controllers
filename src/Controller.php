@@ -49,6 +49,6 @@ class Controller
      */
     public function getApplication()
     {
-        return app('app');
+        return app('kernel');
     }
 }
