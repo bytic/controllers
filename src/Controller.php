@@ -17,7 +17,7 @@ class Controller
      */
     public function __construct()
     {
-        $this->inflectName();
+//        $this->inflectName();
     }
 
     /**

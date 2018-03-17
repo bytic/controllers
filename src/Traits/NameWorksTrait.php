@@ -16,11 +16,11 @@ trait NameWorksTrait
 
     use UtilityNameWorksTrait;
 
-    protected function inflectName()
-    {
-        $name = str_replace("Controller", "", get_class($this));
-        $this->name = inflector()->unclassify($name);
-    }
+//    protected function inflectName()
+//    {
+//        $name = str_replace("Controller", "", get_class($this));
+//        $this->name = inflector()->unclassify($name);
+//    }
 
     /**
      * @return string
@@ -53,7 +53,12 @@ trait NameWorksTrait
 
     public function initName()
     {
-        $this->setName($this->getFullName());
+        $this->setName($this->generateName());
+    }
+
+    protected function generateName()
+    {
+        return $this->getRequest()->getControllerName();
     }
 
     /**
