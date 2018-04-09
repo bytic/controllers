@@ -1,6 +1,6 @@
 <?php
 
-namespace Nip\Controllers\Tests\Helpers;
+namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Controller;
 use Nip\Controllers\Tests\AbstractTest;

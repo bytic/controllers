@@ -2,6 +2,9 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\HelperBroker;
+use Nip\Helpers\AbstractHelper;
+
 /**
  * Trait HasHelpersTrait
  * @package Nip\Controllers\Trait
@@ -13,13 +16,13 @@ namespace Nip\Controllers\Traits;
 trait HasHelpersTrait
 {
     /**
-     * @var Helpers\AbstractHelper[]
+     * @var AbstractHelper[]
      */
     protected $helpers = [];
 
     /**
      * @param $name
-     * @return Helpers\AbstractHelper
+     * @return AbstractHelper
      */
     public function getHelper($name)
     {
