@@ -2,6 +2,9 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\Controllers\Controller;
+use Nip\Request;
+
 /**
  * Trait DispatcherAwareTrait
  * @package Nip\Controllers\Traits

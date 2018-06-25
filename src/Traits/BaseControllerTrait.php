@@ -4,7 +4,6 @@ namespace Nip\Controllers\Traits;
 
 use Nip\Config\ConfigAwareTrait;
 use Nip\Http\Response\ResponseAwareTrait;
-use Nip\Http\Request\RequestAwareTrait;
 
 /**
  * Trait BaseControllerTrait
