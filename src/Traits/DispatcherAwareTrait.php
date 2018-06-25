@@ -16,6 +16,7 @@ trait DispatcherAwareTrait
      * @param bool $module
      * @param array $params
      * @return mixed
+     * @throws \Exception
      */
     public function call($action = false, $controller = false, $module = false, $params = [])
     {
