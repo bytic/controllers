@@ -65,7 +65,6 @@
       <path value="$PROJECT_DIR$/vendor/bytic/helpers" />
       <path value="$PROJECT_DIR$/vendor/bytic/filesystem" />
       <path value="$PROJECT_DIR$/vendor/bytic/router" />
-      <path value="$PROJECT_DIR$/vendor/bytic/dispatcher" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
     </include_path>
   </component>

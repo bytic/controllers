@@ -11,8 +11,6 @@ use Nip\Request;
  */
 trait DispatcherAwareTrait
 {
-    use \Nip\Dispatcher\DispatcherAwareTrait;
-
     /**
      * @param bool $action
      * @param bool $controller
@@ -23,25 +21,15 @@ trait DispatcherAwareTrait
      */
     public function call($action = false, $controller = false, $module = false, $params = [])
     {
+        /** @var Request $newRequest */
         $newRequest = $this->getRequest()->duplicateWithParams($action, $controller, $module, $params);
 
-        $controller = $this->getDispatcher()->generateController($newRequest);
-        $controller = $this->prepareCallController($controller, $newRequest);
-
-        return call_user_func_array([$controller, $action], $params);
-    }
-
-    /**
-     * @param self $controller
-     * @param Request $newRequest
-     * @return Controller
-     */
-    protected function prepareCallController($controller, $newRequest)
-    {
-        $controller->setRequest($newRequest);
-        $controller->populateFromRequest($newRequest);
-
-        return $controller;
+        $action = [
+            'module' => $newRequest->getModuleName(),
+            'controller' => $newRequest->getControllerName(),
+            'action' => $newRequest->getActionName(),
+        ];
+        return $this->getDispatcher()->call($action, $params);
     }
 
     /**
@@ -53,5 +41,13 @@ trait DispatcherAwareTrait
     protected function forward($action = false, $controller = false, $module = false, $params = [])
     {
         $this->getDispatcher()->forward($action, $controller, $module, $params);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getDispatcher()
+    {
+        return app('dispatcher');
     }
 }
