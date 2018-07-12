@@ -29,6 +29,7 @@ trait DispatcherAwareTrait
             'controller' => $newRequest->getControllerName(),
             'action' => $newRequest->getActionName(),
         ];
+        $params['_request'] = $newRequest;
         return $this->getDispatcher()->call($action, $params);
     }
 
