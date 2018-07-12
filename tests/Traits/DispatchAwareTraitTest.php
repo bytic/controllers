@@ -18,13 +18,7 @@ class DispatchAwareTraitTest extends AbstractTest
     {
         $newController = new BaseControllerWithUtilityMethods();
 
-        $dispatcher = m::mock(Dispatcher::class)
-            ->shouldReceive('generateController')
-            ->andReturn($newController)
-            ->getMock();
-
         $controller = new BaseControllerWithUtilityMethods();
-        $controller->setDispatcher($dispatcher);
         $controller->setRequest(new Request());
 
         $response = $controller->call('hello');

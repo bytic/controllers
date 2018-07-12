@@ -48,7 +48,6 @@ trait ActionCallTrait
         $response = call_user_func_array([$this, $method], $parameters);
 
         if ($response instanceof ResponseInterface) {
-            var_dump($response);
             $this->setResponse($response);
         }
 
