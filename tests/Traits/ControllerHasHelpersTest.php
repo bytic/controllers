@@ -13,7 +13,6 @@ use Nip\Http\Response\Response;
  */
 class ControllerHasHelpersTest extends AbstractTest
 {
-
     public function testDynamicCallHelper()
     {
         $controller = new Controller();
