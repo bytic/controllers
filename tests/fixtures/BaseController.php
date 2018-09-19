@@ -11,10 +11,8 @@ use Nip\Controllers\Traits\BaseControllerTrait;
  */
 class BaseController extends Controller
 {
-
     public function index()
     {
         return 'index';
     }
-
 }
