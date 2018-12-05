@@ -19,12 +19,13 @@
   "autoload-dev": {
     "psr-4": {
       "Nip\\Controllers\\Tests\\": "tests/",
-      "Nip\\Controllers\\Tests\\Fixtres\\": "tests/fixtures"
+      "Nip\\Controllers\\Tests\\Fixtures\\": "tests/fixtures"
     }
   },
   "require": {
     "php": "^7.0",
     "bytic/container": "^1.0",
+    "bytic/dispatcher": "^1.0",
     "bytic/helpers": "^1.0",
     "bytic/config": "^1.0",
     "bytic/http": "^1.0",
