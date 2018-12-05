@@ -13,7 +13,8 @@
   "autoload": {
     "psr-4": {
       "Nip\\Controllers\\": "src"
-    }
+    },
+    "classmap": ["./legacy"]
   },
   "autoload-dev": {
     "psr-4": {
