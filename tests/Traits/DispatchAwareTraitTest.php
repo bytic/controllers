@@ -16,8 +16,6 @@ class DispatchAwareTraitTest extends AbstractTest
 {
     public function testCallWithEmptyParams()
     {
-        $newController = new BaseControllerWithUtilityMethods();
-
         $controller = new BaseControllerWithUtilityMethods();
         $controller->setRequest(new Request());
 

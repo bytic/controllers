@@ -2,7 +2,9 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\Container\Container;
 use Nip\Controllers\Controller;
+use Nip\Dispatcher\Dispatcher;
 use Nip\Request;
 
 /**
@@ -30,6 +32,7 @@ trait DispatcherAwareTrait
             'action' => $newRequest->getActionName(),
         ];
         $params['_request'] = $newRequest;
+
         return $this->getDispatcher()->call($action, $params);
     }
 
@@ -45,10 +48,13 @@ trait DispatcherAwareTrait
     }
 
     /**
-     * @return mixed
+     * @return Dispatcher
      */
     protected function getDispatcher()
     {
-        return app('dispatcher');
+        if (function_exists('app')) {
+            return app('dispatcher');
+        }
+        return Container::getInstance()->get('dispatcher');
     }
 }
