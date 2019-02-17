@@ -14,26 +14,43 @@ use Nip\Request;
 trait DispatcherAwareTrait
 {
     /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function call()
+    {
+        $arguments = func_get_args();
+        if (count($arguments) >= 3) {
+            return $this->callMCA(...$arguments);
+        }
+
+        if (count($arguments) == 2 && is_array($arguments[1])) {
+            if (is_string($arguments[0])) {
+                return $this->{$arguments[0]}(...$arguments[1]);
+            }
+        }
+
+        if (count($arguments) == 1) {
+            return $this->{$arguments[0]}();
+        }
+
+        throw new \Exception("Controller call method invoked with invalid parameters");
+    }
+
+    /**
      * @param bool $action
      * @param bool $controller
      * @param bool $module
      * @param array $params
      * @return mixed
-     * @throws \Exception
      */
-    public function call($action = false, $controller = false, $module = false, $params = [])
+    protected function callMCA($action = false, $controller = false, $module = false, $params = [])
     {
         /** @var Request $newRequest */
         $newRequest = $this->getRequest()->duplicateWithParams($action, $controller, $module, $params);
 
-        $action = [
-            'module' => $newRequest->getModuleName(),
-            'controller' => $newRequest->getControllerName(),
-            'action' => $newRequest->getActionName(),
-        ];
-        $params['_request'] = $newRequest;
-
-        return $this->getDispatcher()->call($action, $params);
+        /** @noinspection PhpUnhandledExceptionInspection */
+        return $this->getDispatcher()->callFromRequest($newRequest, $params);
     }
 
     /**
@@ -55,6 +72,7 @@ trait DispatcherAwareTrait
         if (function_exists('app')) {
             return app('dispatcher');
         }
+
         return Container::getInstance()->get('dispatcher');
     }
 }

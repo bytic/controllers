@@ -22,11 +22,13 @@ class BaseControllerWithUtilityMethods
     }
 
     /**
+     * @param string $name
      * @return string
      */
-    public function hello()
+    public function hello($name = '')
     {
-        return 'hello';
+        return 'hello'
+            .(!empty($name) ? ' '.$name : '');
     }
 
     public function afterAction()
