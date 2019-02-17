@@ -25,5 +25,4 @@ class BaseControllerWithUtilityMethods
     {
         $this->getResponse()->headers->set('afterAction', 'value');
     }
-
 }
