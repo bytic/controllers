@@ -2,6 +2,9 @@
 
 namespace Nip\Controllers\Traits;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Trait DispatcherAwareTrait
  * @package Nip\Controllers\Traits
@@ -24,13 +27,36 @@ trait DispatcherAwareTrait
     }
 
     /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function call()
+    {
+        $arguments = func_get_args();
+        if (count($arguments) >= 3) {
+            return $this->callMCA(...$arguments);
+        }
+
+        if (count($arguments) == 2 && is_array($arguments[1])) {
+            if (is_string($arguments[0])) {
+                return $this->{$arguments[0]}(...$arguments[1]);
+            }
+        }
+
+        if (count($arguments) == 1) {
+            return $this->{$arguments[0]}();
+        }
+
+        throw new \Exception("Controller call method invoked with invalid parameters");
+    }
+    /**
      * @param bool $action
      * @param bool $controller
      * @param bool $module
      * @param array $params
      * @return mixed
      */
-    public function call($action = false, $controller = false, $module = false, $params = [])
+    protected function callMCA($action = false, $controller = false, $module = false, $params = [])
     {
         $newRequest = $this->getRequest()->duplicateWithParams($action, $controller, $module, $params);
 

@@ -21,6 +21,16 @@ class BaseControllerWithUtilityMethods
     {
     }
 
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function hello($name = '')
+    {
+        return 'hello'
+            .(!empty($name) ? ' '.$name : '');
+    }
+
     public function afterAction()
     {
         $this->getResponse()->headers->set('afterAction', 'value');
