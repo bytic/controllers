@@ -19,4 +19,5 @@ trait BaseControllerTrait
     use ActionCallTrait;
     use DispatcherAwareTrait;
     use RedirectTrait;
+    use HttpsTrait;
 }
