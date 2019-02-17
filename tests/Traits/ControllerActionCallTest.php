@@ -12,7 +12,6 @@ use Nip\Http\Response\Response;
  */
 class ControllerActionCallTest extends AbstractTest
 {
-
     public function testCallActionEmptyMethod()
     {
         $controller = new BaseControllerWithUtilityMethods();
