@@ -2,6 +2,7 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -67,7 +68,7 @@ trait DispatcherAwareTrait
     }
 
     /**
-     * @param self $controller
+     * @param Controller $controller
      * @param Request $newRequest
      * @return Controller
      */
@@ -75,6 +76,10 @@ trait DispatcherAwareTrait
     {
         $controller->setRequest($newRequest);
         $controller->populateFromRequest($newRequest);
+
+        if (method_exists($controller, 'setView')) {
+            $controller->setView($this->getView());
+        }
 
         return $controller;
     }

@@ -47,7 +47,7 @@ trait AbstractControllerTrait
     /**
      * @return RecordManager
      */
-    abstract public function getModelManager();
+//    abstract public function getModelManager();
 
     /**
      * @param $url
