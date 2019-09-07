@@ -34,28 +34,32 @@ trait DispatcherAwareTrait
     public function call()
     {
         $arguments = func_get_args();
-        if (count($arguments) >= 3) {
+        $argumentsCount = count($arguments);
+        if ($argumentsCount >= 3) {
             return $this->callMCA(...$arguments);
         }
 
-        if (count($arguments) == 2 && is_array($arguments[1])) {
-            if (is_string($arguments[0])) {
+        if ($argumentsCount == 2) {
+            if (is_string($arguments[0]) && is_array($arguments[1])) {
                 return $this->{$arguments[0]}(...$arguments[1]);
             }
+            return $this->callMCA(...$arguments);
         }
 
-        if (count($arguments) == 1) {
+        if ($argumentsCount == 1) {
             return $this->{$arguments[0]}();
         }
 
         throw new \Exception("Controller call method invoked with invalid parameters");
     }
+
     /**
      * @param bool $action
      * @param bool $controller
      * @param bool $module
      * @param array $params
      * @return mixed
+     * @throws \Exception
      */
     protected function callMCA($action = false, $controller = false, $module = false, $params = [])
     {
@@ -89,6 +93,7 @@ trait DispatcherAwareTrait
      * @param bool $controller
      * @param bool $module
      * @param array $params
+     * @throws \Nip\Dispatcher\Exceptions\ForwardException
      */
     protected function forward($action = false, $controller = false, $module = false, $params = [])
     {
