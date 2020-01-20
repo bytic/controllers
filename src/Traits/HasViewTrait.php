@@ -32,7 +32,7 @@ trait HasViewTrait
      */
     public function getView()
     {
-        if ( ! $this->view) {
+        if (!$this->view) {
             $this->view = $this->initView();
         }
 
@@ -79,6 +79,16 @@ trait HasViewTrait
         $view = $this->initViewContentBlocks($view);
 
         return $view;
+    }
+
+    protected function afterActionLoadViewIntoResponse()
+    {
+        $content = $this->getView()->load(
+            '/layouts/' . $this->getLayout(),
+            [],
+            true
+        );
+        $this->getResponse()->setContent($content);
     }
 
     /**
