@@ -43,6 +43,7 @@ trait DispatcherAwareTrait
      * @param bool $module
      * @param array $params
      * @return mixed
+     * @throws \Exception
      */
     protected function callMCA($action = false, $controller = false, $module = false, $params = [])
     {
@@ -58,6 +59,7 @@ trait DispatcherAwareTrait
      * @param bool $controller
      * @param bool $module
      * @param array $params
+     * @throws \Nip\Dispatcher\Exceptions\ForwardException
      */
     protected function forward($action = false, $controller = false, $module = false, $params = [])
     {
