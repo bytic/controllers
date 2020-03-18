@@ -32,7 +32,7 @@ trait HasViewTrait
      */
     public function getView()
     {
-        if ( ! $this->view) {
+        if (!$this->view) {
             $this->view = $this->initView();
         }
 
@@ -103,10 +103,12 @@ trait HasViewTrait
      */
     protected function initViewVars($view)
     {
-        $view->setRequest($this->getRequest());
+        if (method_exists($view, 'setRequest')) {
+            $view->setRequest($this->getRequest());
+        }
+
         $view->set('controller', $this->getName());
         $view->set('action', $this->getRequest()->getActionName());
-        $view->set('options', (isset($this->options) ? $this->options : null));
 
         return $view;
     }
@@ -118,8 +120,10 @@ trait HasViewTrait
      */
     protected function initViewContentBlocks($view)
     {
-        $view->setBlock('content',
-            $this->getRequest()->getControllerName() . '/' . $this->getRequest()->getActionName());
+        $view->setBlock(
+            'content',
+            $this->getRequest()->getControllerName().'/'.$this->getRequest()->getActionName()
+        );
 
         return $view;
     }
