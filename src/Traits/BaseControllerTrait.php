@@ -19,6 +19,7 @@ trait BaseControllerTrait
     use RequestAwareTrait;
     use ActionCallTrait;
     use DispatcherAwareTrait;
+    use ErrorHandling;
     use RedirectTrait;
     use HttpsTrait;
 }
