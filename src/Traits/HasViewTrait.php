@@ -92,11 +92,11 @@ trait HasViewTrait
      */
     protected function populateViewPath($view)
     {
-        if ( ! defined('MODULES_PATH')) {
+        if (! defined('MODULES_PATH')) {
             return;
         }
         $path = MODULES_PATH . $this->getRequest()->getModuleName() . '/views/';
-        if ( ! is_dir($path)) {
+        if (! is_dir($path)) {
             return;
         }
         $view->setBasePath(MODULES_PATH . $this->getRequest()->getModuleName() . '/views/');
