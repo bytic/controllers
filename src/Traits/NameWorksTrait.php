@@ -56,6 +56,9 @@ trait NameWorksTrait
         $this->setName($this->generateName());
     }
 
+    /**
+     * @return mixed
+     */
     protected function generateName()
     {
         return $this->getRequest()->getControllerName();

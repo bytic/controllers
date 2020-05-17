@@ -2,9 +2,10 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\Dispatcher\Resolver\ClassResolver\NameFormatter;
+use Nip\Http\Response\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Nip\Dispatcher\Dispatcher;
 
 /**
  * Trait ActionCallTrait
@@ -21,7 +22,8 @@ trait ActionCallTrait
      */
     public function dispatchAction($action = false)
     {
-        $action = Dispatcher::formatActionName($action);
+        $action = NameFormatter::formatActionName($action);
+
         return $this->callAction($action);
     }
 

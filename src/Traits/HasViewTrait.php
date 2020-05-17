@@ -53,10 +53,11 @@ trait HasViewTrait
     protected function initView()
     {
         if (isset($this->getRequest()->_view) && $this->getRequest()->_view instanceof View) {
-            return $this->getRequest()->_view;
+            $view = $this->getRequest()->_view;
+        } else {
+            $view =  $this->getViewObject();
         }
 
-        $view = $this->getViewObject();
         $view = $this->populateView($view);
 
         $this->getRequest()->_view = $view;

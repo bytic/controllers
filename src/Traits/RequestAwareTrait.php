@@ -2,7 +2,7 @@
 
 namespace Nip\Controllers\Traits;
 
-use Nip\Request;
+use Nip\Http\Request;
 
 /**
  * Trait RequestAwareTrait
@@ -17,7 +17,7 @@ trait RequestAwareTrait
      */
     public function populateFromRequest(Request $request)
     {
-        $this->name = $request->getControllerName();
-        $this->action = $request->getActionName();
+        $this->setName($request->getControllerName());
+        $this->setAction($request->getActionName());
     }
 }
