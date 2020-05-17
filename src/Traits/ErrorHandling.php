@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 trait ErrorHandling
 {
-
     protected function dispatchAccessDeniedResponse()
     {
         throw $this->createAccessDeniedException();
