@@ -75,7 +75,11 @@ class ResponsePayloadTransformer
 
         $viewPath = $this->controller->getLayoutPath();
 
-        return $this->factory->view($viewPath, $this->payload->all());
+        return $this->factory->view(
+            $viewPath,
+            $this->payload->data->all(),
+            $this->payload->headers->all()
+        );
     }
 
     protected function responseControllerMethod(): string

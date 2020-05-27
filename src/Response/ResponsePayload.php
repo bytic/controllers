@@ -10,6 +10,7 @@ class ResponsePayload
 {
     use ResponsePayload\HasDataTrait;
     use ResponsePayload\HasFormatTrait;
+    use ResponsePayload\HasHeadersTrait;
 
     /**
      * ResponsePayload constructor.
@@ -17,5 +18,6 @@ class ResponsePayload
     public function __construct()
     {
         $this->initData();
+        $this->initHeaders();
     }
 }

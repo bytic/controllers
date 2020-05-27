@@ -13,7 +13,7 @@ trait HasDataTrait
     /**
      * @var ResponseData
      */
-    protected $data;
+    public $data;
 
     protected function initData()
     {
