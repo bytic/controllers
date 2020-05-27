@@ -61,7 +61,11 @@ trait NameWorksTrait
      */
     protected function generateName()
     {
-        return $this->getRequest()->getControllerName();
+        if ($this->hasRequest()) {
+            return $this->getRequest()->getControllerName();
+        }
+        $class = $this->getClassFirstName();
+        return str_replace('Controller', '', $class);
     }
 
     /**

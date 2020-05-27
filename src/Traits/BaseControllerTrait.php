@@ -3,7 +3,6 @@
 namespace Nip\Controllers\Traits;
 
 use Nip\Config\ConfigAwareTrait;
-use Nip\Http\Response\ResponseAwareTrait;
 
 /**
  * Trait BaseControllerTrait
@@ -14,7 +13,7 @@ trait BaseControllerTrait
     use NameWorksTrait;
     use HasHelpersTrait;
     use HasViewTrait;
-    use ResponseAwareTrait;
+    use HasResponseTrait;
     use ConfigAwareTrait;
     use RequestAwareTrait;
     use ActionCallTrait;

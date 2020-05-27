@@ -2,6 +2,8 @@
 
 namespace Nip\Controllers\Traits;
 
+use Nip\Controllers\View\ControllerViewHydrator;
+use Nip\Http\Request;
 use Nip\View;
 
 /**
@@ -22,9 +24,19 @@ trait HasViewTrait
      */
     protected $layout = 'default';
 
-    public function loadView()
+    /**
+     * @param bool $return
+     * @return bool|string|null
+     */
+    public function loadView($return = false)
     {
-        echo $this->getView()->load($this->getLayoutPath());
+        $view = $this->getView();
+        $this->populateView($view);
+        $content = $view->load($this->getLayoutPath());
+        if ($return == true) {
+            return $content;
+        }
+        echo $content;
     }
 
     /**
@@ -52,15 +64,18 @@ trait HasViewTrait
      */
     protected function initView()
     {
-        if (isset($this->getRequest()->_view) && $this->getRequest()->_view instanceof View) {
-            $view = $this->getRequest()->_view;
-        } else {
-            $view =  $this->getViewObject();
+        $request = $this->getRequest();
+        if ($request instanceof Request) {
+            if (isset($request->_view) && $request->_view instanceof View) {
+                return $request->_view;
+            }
         }
 
-        $view = $this->populateView($view);
+        $view = $this->getViewObject();
 
-        $this->getRequest()->_view = $view;
+        if ($request instanceof Request) {
+            $request->_view = $view;
+        }
 
         return $view;
     }
@@ -78,12 +93,14 @@ trait HasViewTrait
      *
      * @return View
      */
-    protected function populateView($view)
+    public function populateView($view)
     {
         $this->populateViewPath($view);
 
         $view = $this->initViewVars($view);
-        $view = $this->initViewContentBlocks($view);
+
+        // @deprecated Rely on Response Payload Transformer to call this method
+//        $view = $this->initViewContentBlocks($view);
 
         return $view;
     }
@@ -93,14 +110,7 @@ trait HasViewTrait
      */
     protected function populateViewPath($view)
     {
-        if (! defined('MODULES_PATH')) {
-            return;
-        }
-        $path = MODULES_PATH . $this->getRequest()->getModuleName() . '/views/';
-        if (! is_dir($path)) {
-            return;
-        }
-        $view->setBasePath(MODULES_PATH . $this->getRequest()->getModuleName() . '/views/');
+        return ControllerViewHydrator::populatePath($view, $this);
     }
 
     /**
@@ -110,14 +120,7 @@ trait HasViewTrait
      */
     protected function initViewVars($view)
     {
-        if (method_exists($view, 'setRequest')) {
-            $view->setRequest($this->getRequest());
-        }
-
-        $view->set('controller', $this->getName());
-        $view->set('action', $this->getRequest()->getActionName());
-
-        return $view;
+        return ControllerViewHydrator::initVars($view, $this);
     }
 
     /**
@@ -127,12 +130,7 @@ trait HasViewTrait
      */
     protected function initViewContentBlocks($view)
     {
-        $view->setBlock(
-            'content',
-            $this->getRequest()->getControllerName().'/'.$this->getRequest()->getActionName()
-        );
-
-        return $view;
+        return ControllerViewHydrator::initContentBlocks($view, $this);
     }
 
     /**

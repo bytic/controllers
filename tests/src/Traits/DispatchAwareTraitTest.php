@@ -3,10 +3,8 @@
 namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Tests\AbstractTest;
-use Nip\Controllers\Tests\Fixtures\BaseControllerWithUtilityMethods;
-use Nip\Dispatcher\Dispatcher;
+use Nip\Controllers\Tests\Fixtures\Controllers\BaseControllerWithUtilityMethods;
 use Nip\Request;
-use Mockery as m;
 
 /**
  * Class DispatchAwareTraitTest

@@ -4,8 +4,6 @@ namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Controller;
 use Nip\Controllers\Tests\AbstractTest;
-use Nip\Controllers\Tests\Fixtures\BaseControllerWithUtilityMethods;
-use Nip\Http\Response\Response;
 
 /**
  * Class ControllerHasHelpersTest

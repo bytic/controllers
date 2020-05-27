@@ -1,6 +1,6 @@
 <?php
 
-namespace Nip\Controllers\Tests\Fixtures;
+namespace Nip\Controllers\Tests\Fixtures\Controllers;
 
 use Nip\Controllers\Traits\BaseControllerTrait;
 
