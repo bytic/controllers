@@ -5,6 +5,7 @@ namespace Nip\Controllers\Response;
 use Nip\Controllers\Controller;
 use Nip\Controllers\Traits\HasResponseTrait;
 use Nip\Controllers\View\ControllerViewHydrator;
+use Nip\Http\Response\Response;
 use Nip\Utility\Str;
 
 /**
@@ -78,6 +79,7 @@ class ResponsePayloadTransformer
         return $this->factory->view(
             $viewPath,
             $this->payload->data->all(),
+            Response::HTTP_OK,
             $this->payload->headers->all()
         );
     }
