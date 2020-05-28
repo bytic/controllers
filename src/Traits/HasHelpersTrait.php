@@ -28,4 +28,13 @@ trait HasHelpersTrait
     {
         return HelperBroker::get($name);
     }
+
+    /**
+     * @return \Nip_Helper_Url
+     * @deprecated use \Nip\url() instead
+     */
+    public function Url()
+    {
+        return $this->getHelper('Url');
+    }
 }
