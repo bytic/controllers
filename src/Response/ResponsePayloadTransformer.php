@@ -4,6 +4,7 @@ namespace Nip\Controllers\Response;
 
 use Nip\Controllers\Controller;
 use Nip\Controllers\Traits\HasResponseTrait;
+use Nip\Controllers\Traits\HasViewTrait;
 use Nip\Controllers\View\ControllerViewHydrator;
 use Nip\Http\Response\Response;
 use Nip\Utility\Str;
@@ -14,7 +15,11 @@ use Nip\Utility\Str;
  */
 class ResponsePayloadTransformer
 {
+    /**
+     * @var Controller|HasViewTrait
+     */
     protected $controller;
+
     protected $payload;
     protected $factory;
 
@@ -73,15 +78,19 @@ class ResponsePayloadTransformer
         ControllerViewHydrator::initContentBlocks($view, $this->controller);
 
         $this->factory->setView($view);
+        $this->payload->headers->set('Content-Type', 'text/html');
 
         $viewPath = $this->controller->getLayoutPath();
 
-        return $this->factory->view(
+        $response = $this->factory->view(
             $viewPath,
             $this->payload->data->all(),
             Response::HTTP_OK,
             $this->payload->headers->all()
         );
+
+        $response->setCharset('utf-8');
+        return $response;
     }
 
     protected function responseControllerMethod(): string

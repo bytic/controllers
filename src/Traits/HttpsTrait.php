@@ -2,7 +2,7 @@
 
 namespace Nip\Controllers\Traits;
 
-use Nip\Request;
+use Nip\Http\Request;
 
 /**
  * Trait HttpsTrait

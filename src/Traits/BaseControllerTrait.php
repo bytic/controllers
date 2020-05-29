@@ -12,7 +12,6 @@ trait BaseControllerTrait
 {
     use NameWorksTrait;
     use HasHelpersTrait;
-    use HasViewTrait;
     use HasResponseTrait;
     use ConfigAwareTrait;
     use RequestAwareTrait;

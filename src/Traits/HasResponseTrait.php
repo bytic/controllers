@@ -44,9 +44,21 @@ trait HasResponseTrait
     public function payload()
     {
         if ($this->responsePayload === null) {
-            $this->responsePayload = new ResponsePayload();
+            $this->responsePayload = $this->generateResponsePayload();
         }
 
         return $this->responsePayload;
+    }
+
+    /**
+     * @return ResponsePayload
+     */
+    protected function generateResponsePayload()
+    {
+        $payload = new ResponsePayload();
+        if (method_exists($this, 'getView')) {
+            $payload->withDefaultFormat('view');
+        }
+        return $payload;
     }
 }
