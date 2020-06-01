@@ -3,7 +3,7 @@
 namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Tests\AbstractTest;
-use Nip\Controllers\Tests\Fixtures\Controllers\BaseController;
+use Nip\Controllers\Tests\Fixtures\Controllers\ViewController;
 use Nip\Http\Response\Response;
 
 /**
@@ -14,7 +14,7 @@ class HasResponseTraitTest extends AbstractTest
 {
     public function test_newResponse()
     {
-        $controller = new BaseController();
+        $controller = new ViewController();
         $controller->setName('base');
         $controller->payload()->withDefaultFormat('view');
 

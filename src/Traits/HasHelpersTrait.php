@@ -9,7 +9,6 @@ use Nip\Helpers\AbstractHelper;
  * Trait HasHelpersTrait
  * @package Nip\Controllers\Trait
  *
- * @method \Nip_Helper_Url Url()
  * @method \Nip_Helper_Arrays Arrays()
  * @method \Nip_Helper_Async Async()
  */

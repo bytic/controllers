@@ -3,6 +3,7 @@
 namespace Nip\Controllers\Traits;
 
 use Nip\Config\ConfigAwareTrait;
+use Nip\Controllers\Events\HasLifecycleTrait;
 
 /**
  * Trait BaseControllerTrait
@@ -16,6 +17,7 @@ trait BaseControllerTrait
     use ConfigAwareTrait;
     use RequestAwareTrait;
     use ActionCallTrait;
+    use HasLifecycleTrait;
     use DispatcherAwareTrait;
     use ErrorHandling;
     use RedirectTrait;

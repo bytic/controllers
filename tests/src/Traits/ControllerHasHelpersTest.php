@@ -23,6 +23,5 @@ class ControllerHasHelpersTest extends AbstractTest
         $controller = new Controller();
 
         static::assertInstanceOf('Nip_Helper_Url', $controller->getHelper('Url'));
-        static::assertInstanceOf('Nip_Helper_Xml', $controller->getHelper('Xml'));
     }
 }

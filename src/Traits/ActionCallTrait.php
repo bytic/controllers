@@ -56,8 +56,8 @@ trait ActionCallTrait
      */
     protected function runAction($method, $parameters = [])
     {
-        $this->callUtilityMethods('parseRequest');
-        $this->callUtilityMethods('beforeAction');
+        $this->invokeStage('parseRequest');
+        $this->invokeStage('beforeAction');
 
         $response = call_user_func_array([$this, $method], $parameters);
 
@@ -65,23 +65,13 @@ trait ActionCallTrait
             $this->setResponse($response);
         }
 
-        $this->callUtilityMethods('afterAction');
+        $this->invokeStage('afterAction');
 
         if ($this->hasResponse()) {
             return $this->getResponse();
         }
 
         return $this->getResponse(true);
-    }
-
-    /**
-     * @param $method
-     */
-    protected function callUtilityMethods($method)
-    {
-        if (method_exists($this, $method)) {
-            $this->{$method}();
-        }
     }
 
     /**
