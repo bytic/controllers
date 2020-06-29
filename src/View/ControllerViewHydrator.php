@@ -4,6 +4,7 @@ namespace Nip\Controllers\View;
 
 use Nip\Controllers\Controller;
 use Nip\Http\Request;
+use Nip\Utility\Container;
 
 /**
  * Class ControllerViewHydrator
@@ -51,42 +52,32 @@ class ControllerViewHydrator
     /**
      * @param $view
      * @param void|Controller $controller
+     * @return mixed
      */
     public static function populatePath($view, $controller = null)
     {
-        if (method_exists($controller, 'generateViewPath')) {
-            $view->setBasePath($controller->generateViewPath());
-            return $view;
+        $path = ViewPathDetector::for($controller);
+        if (is_dir($path)) {
+            $view->setBasePath($path);
         }
-
-        if (!defined('MODULES_PATH')) {
-            return $view;
-        }
-        $request = static::detectRequest($controller);
-        if (!($request instanceof Request)) {
-            return $view;
-        }
-
-        $path = MODULES_PATH . $request->getModuleName() . '/views/';
-        if (!is_dir($path)) {
-            return $view;
-        }
-        $view->setBasePath(MODULES_PATH . $request->getModuleName() . '/views/');
 
         return $view;
     }
 
     /**
      * @param null|Controller $controller
+     * @return array|Request|\Nip\Request|string|null
      */
     protected static function detectRequest($controller = null)
     {
         if ($controller instanceof Controller && $controller->hasRequest()) {
             return $controller->getRequest();
         }
-        $request = function_exists('request')? request() : null;
-        if ($request instanceof Request) {
-            return $request;
+        if (function_exists('request') && Container::container()->has('request')) {
+            $request = request();
+            if ($request instanceof Request) {
+                return $request;
+            }
         }
         return null;
     }
