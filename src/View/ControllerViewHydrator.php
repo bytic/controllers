@@ -5,6 +5,7 @@ namespace Nip\Controllers\View;
 use Nip\Controllers\Controller;
 use Nip\Http\Request;
 use Nip\Utility\Container;
+use Nip\View\View;
 
 /**
  * Class ControllerViewHydrator
@@ -14,17 +15,16 @@ class ControllerViewHydrator
 {
 
     /**
-     * @param $view
+     * @param View $view
      * @param null $controller
      * @return mixed
      */
     public static function initContentBlocks($view, $controller = null)
     {
-        $request = static::detectRequest($controller);
-        $view->setBlock(
-            'content',
-            $controller->getName() . '/' . $controller->getAction()
-        );
+        $action = inflector()->underscore($controller->getAction());
+        $controller = inflector()->underscore($controller->getName());
+
+        $view->setBlock('content', $controller . '/' . $action);
 
         return $view;
     }
