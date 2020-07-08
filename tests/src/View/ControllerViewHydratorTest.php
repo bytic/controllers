@@ -27,7 +27,7 @@ class ControllerViewHydratorTest extends AbstractTest
     {
         /** @var View\View|Mock $view */
         $view = \Mockery::mock(View::class)->makePartial();
-        $view->shouldReceive('load')->with('/test_name/test_action')->andReturnTrue();
+        $view->shouldReceive('load')->with('/testName/test_action')->andReturnTrue();
 
         $controller = new ViewController();
         $controller->setName('testName');

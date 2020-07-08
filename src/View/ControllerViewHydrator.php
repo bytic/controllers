@@ -22,7 +22,7 @@ class ControllerViewHydrator
     public static function initContentBlocks($view, $controller = null)
     {
         $action = inflector()->underscore($controller->getAction());
-        $controller = inflector()->underscore($controller->getName());
+        $controller = $controller->getName();
 
         $view->setBlock('content', $controller . '/' . $action);
 
