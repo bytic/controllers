@@ -24,7 +24,7 @@ class StageCallbacks
      * @param Closure $callback
      * @return $this
      */
-    public function add(Closure $callback)
+    public function add(callable $callback)
     {
         $this->callbacks[] = $callback;
         return $this;
@@ -37,10 +37,10 @@ class StageCallbacks
     {
         $output = '';
         foreach ($this->callbacks as $callback) {
-            /** @var Closure $callback */
-            if ($callback instanceof Closure) {
-                $callback = Closure::bind($callback, $this);
-            }
+//            /** @var Closure $callback */
+//            if ($callback instanceof Closure) {
+//                $callback = Closure::bind($callback, $this);
+//            }
             // Invoke the callback with buffering enabled
             $output .= \call_user_func_array($callback, []);
         }

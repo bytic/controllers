@@ -10,6 +10,7 @@ use Nip\Controllers\Controller;
  */
 class BaseController extends Controller
 {
+
     public function index()
     {
         return 'index';

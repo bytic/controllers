@@ -17,9 +17,9 @@ trait HasLifecycleTrait
 
     /**
      * @param $stage
-     * @param Closure $callback
+     * @param callable $callback
      */
-    protected function on(string $stage, Closure $callback)
+    protected function on(string $stage, callable $callback)
     {
         $this->stage($stage)->add($callback);
     }
@@ -27,7 +27,7 @@ trait HasLifecycleTrait
     /**
      * @param Closure $callback
      */
-    protected function onParseRequest(Closure $callback)
+    protected function onParseRequest(callable $callback)
     {
         $this->on('parseRequest', $callback);
     }
@@ -35,7 +35,7 @@ trait HasLifecycleTrait
     /**
      * @param Closure $callback
      */
-    protected function before(Closure $callback)
+    protected function before(callable $callback)
     {
         $this->on('beforeAction', $callback);
     }
@@ -43,7 +43,7 @@ trait HasLifecycleTrait
     /**
      * @param Closure $callback
      */
-    protected function after(Closure $callback)
+    protected function after(callable $callback)
     {
         $this->on('afterAction', $callback);
     }
