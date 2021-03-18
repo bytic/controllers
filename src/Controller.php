@@ -3,6 +3,7 @@
 namespace Nip\Controllers;
 
 use Nip\Controllers\Traits\BaseControllerTrait;
+use Nip\Utility\Traits\CanBootTraitsTrait;
 
 /**
  * Class Controller
@@ -11,12 +12,14 @@ use Nip\Controllers\Traits\BaseControllerTrait;
 class Controller
 {
     use BaseControllerTrait;
+    use CanBootTraitsTrait;
 
     /**
      * Controller constructor.
      */
     public function __construct()
     {
+        $this->bootTraits();
 //        $this->inflectName();
     }
 
