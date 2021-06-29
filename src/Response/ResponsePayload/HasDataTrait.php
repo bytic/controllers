@@ -15,9 +15,36 @@ trait HasDataTrait
      */
     public $data;
 
-    protected function initData()
+    /**
+     * @inheritDoc
+     */
+    public function offsetExists($offset): bool
     {
-        $this->data = new ResponseData();
+        return $this->data->has($offset);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetGet($offset)
+    {
+        return $this->data->get($offset);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetUnset($offset)
+    {
+        $this->data->unset($offset);
     }
 
     /**
@@ -39,10 +66,37 @@ trait HasDataTrait
     }
 
     /**
+     * @param $name
+     * @param $value
+     */
+    public function set($name, $value)
+    {
+        $this->data->set($name, $value);
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function with($key, $value = null)
+    {
+        $data = is_array($key) ? $key : [$key => $value];
+
+        foreach ($data as $key => $value) {
+            $this->set($key, $value);
+        }
+    }
+
+    /**
      * @return mixed
      */
     public function all()
     {
         return $this->data->all();
+    }
+
+    protected function initData()
+    {
+        $this->data = new ResponseData();
     }
 }

@@ -6,6 +6,7 @@ use Nip\Controllers\Controller;
 use Nip\Controllers\Traits\HasResponseTrait;
 use Nip\Controllers\Traits\HasViewTrait;
 use Nip\Controllers\View\ControllerViewHydrator;
+use Nip\Http\Response\JsonResponse;
 use Nip\Http\Response\Response;
 use Nip\Utility\Str;
 
@@ -50,7 +51,7 @@ class ResponsePayloadTransformer
 
 
     /**
-     * @return \Nip\Http\Response\Response
+     * @return \Nip\Http\Response\Response|JsonResponse
      */
     protected function toResponse()
     {
@@ -59,8 +60,12 @@ class ResponsePayloadTransformer
             return call_user_func_array([$this->controller, $controllerMethod], [$this->factory, $this->payload]);
         }
         $format = $this->payload->getFormat();
-        if (in_array($format, ['view', 'html'])) {
-            return $this->toViewResponse();
+        switch ($format) {
+            case 'view':
+            case 'html':
+                return $this->toViewResponse();
+            case 'json':
+                return $this->factory->json($this->payload->all());
         }
 
         return $this->factory->noContent();

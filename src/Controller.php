@@ -38,7 +38,6 @@ class Controller
     }
 
 
-
     /**
      * @return string
      */

@@ -6,7 +6,7 @@ namespace Nip\Controllers\Response;
  * Class ResponsePayload
  * @package Nip\Controllers\Response
  */
-class ResponsePayload
+class ResponsePayload implements \ArrayAccess
 {
     use ResponsePayload\HasDataTrait;
     use ResponsePayload\HasFormatTrait;
