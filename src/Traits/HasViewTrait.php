@@ -106,7 +106,7 @@ trait HasViewTrait
     }
 
     /**
-     * @param View $view
+     * @deprecated Rely on Response Payload Transformer to call this method. Use RegisterViewPaths if necessary
      */
     protected function populateViewPath($view)
     {

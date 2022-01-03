@@ -61,6 +61,11 @@ class ControllerViewHydrator
             $view->setBasePath($path);
         }
 
+        if (method_exists($controller, 'registerViewPaths'))
+        {
+            $controller->registerViewPaths($view);
+        }
+
         return $view;
     }
 
