@@ -105,6 +105,10 @@ trait HasViewTrait
         return $view;
     }
 
+    public function registerViewPaths(\Nip\View\View $view)
+    {
+    }
+
     /**
      * @deprecated Rely on Response Payload Transformer to call this method. Use RegisterViewPaths if necessary
      */
