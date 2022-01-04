@@ -1,6 +1,8 @@
 <?php
 
-namespace Nip\Controllers\Response\ResponsePayload;
+declare(strict_types=1);
+
+namespace Nip\Controllers\Response\ResponsePayload\Traits;
 
 /**
  * Trait HasFormatTrait
@@ -27,9 +29,17 @@ trait HasFormatTrait
     }
 
     /**
-     * @return string
+     * @param string|null $format
      */
-    public function getFormat()
+    public function withFormat(?string $format): void
+    {
+        $this->format = $format;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getFormat(): ?string
     {
         return $this->format ?? $this->defaultFormat;
     }

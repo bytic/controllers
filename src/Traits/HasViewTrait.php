@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Nip\Controllers\View\ControllerViewHydrator;
@@ -37,6 +39,7 @@ trait HasViewTrait
             return $content;
         }
         echo $content;
+        return null;
     }
 
     /**
@@ -105,7 +108,7 @@ trait HasViewTrait
         return $view;
     }
 
-    public function registerViewPaths(\Nip\View\View $view)
+    public function registerViewPaths(View\View $view): void
     {
     }
 

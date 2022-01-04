@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Response;
 
 use Nip\Controllers\Controller;
@@ -27,7 +29,7 @@ class ResponsePayloadTransformer
     /**
      * @param Controller|HasResponseTrait $controller
      * @param ResponsePayload $payload
-     * @return \Nip\Http\Response\Response
+     * @return Response
      */
     public static function make($controller, ResponsePayload $payload)
     {
@@ -51,7 +53,7 @@ class ResponsePayloadTransformer
 
 
     /**
-     * @return \Nip\Http\Response\Response|JsonResponse
+     * @return Response|JsonResponse
      */
     protected function toResponse()
     {
@@ -63,7 +65,7 @@ class ResponsePayloadTransformer
         switch ($format) {
             case 'view':
             case 'html':
-                return $this->toViewResponse();
+            return $this->toViewResponse($format);
             case 'json':
                 return $this->factory->json($this->payload->all());
         }
@@ -72,9 +74,9 @@ class ResponsePayloadTransformer
     }
 
     /**
-     * @return \Nip\Http\Response\Response
+     * @return Response
      */
-    protected function toViewResponse()
+    protected function toViewResponse(): Response
     {
         $view = $this->controller->getView();
 

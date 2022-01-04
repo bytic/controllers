@@ -1,8 +1,9 @@
 <?php
 
-namespace Nip\Controllers\Response\ResponsePayload;
+declare(strict_types=1);
 
-use Nip\Controllers\Response\ResponseData;
+namespace Nip\Controllers\Response\ResponsePayload\Traits;
+
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**

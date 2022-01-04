@@ -1,6 +1,8 @@
 <?php
 
-namespace Nip\Controllers\Response\ResponsePayload;
+declare(strict_types=1);
+
+namespace Nip\Controllers\Response\ResponsePayload\Traits;
 
 use Nip\Controllers\Response\ResponseData;
 
