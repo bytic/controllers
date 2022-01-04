@@ -88,7 +88,8 @@ class ResponsePayloadTransformer
         $this->factory->setView($view);
         $this->payload->headers->set('Content-Type', 'text/html');
 
-        $viewPath = $format == 'modal' ? $view->getBlock('content') : $this->controller->getLayoutPath();
+        $viewPath = $format == 'modal' ? '/' . trim($view->getBlock('content'), '/') : $this->controller->getLayoutPath(
+        );
 
         $response = $this->factory->view(
             $viewPath,

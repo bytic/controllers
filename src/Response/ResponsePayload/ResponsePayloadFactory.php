@@ -30,6 +30,8 @@ class ResponsePayloadFactory
     protected function create(): ResponsePayload
     {
         $this->payload = $this->new();
+        $this->checkDefault();
+        $this->checkRequestQuery();
         return $this->payload;
     }
 
@@ -50,7 +52,7 @@ class ResponsePayloadFactory
         if (!$this->request) {
             return;
         }
-        $param = $this->request->getQueryParam(ResponsePayload::REQUEST_PARAM_FORMAT);
+        $param = $this->request->get(ResponsePayload::REQUEST_PARAM_FORMAT);
         if (empty($param)) {
             return;
         }
