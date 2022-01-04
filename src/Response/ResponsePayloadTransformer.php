@@ -65,7 +65,8 @@ class ResponsePayloadTransformer
         switch ($format) {
             case 'view':
             case 'html':
-            return $this->toViewResponse($format);
+            case 'modal':
+                return $this->toViewResponse($format);
             case 'json':
                 return $this->factory->json($this->payload->all());
         }
@@ -76,7 +77,7 @@ class ResponsePayloadTransformer
     /**
      * @return Response
      */
-    protected function toViewResponse(): Response
+    protected function toViewResponse($format): Response
     {
         $view = $this->controller->getView();
 
@@ -87,7 +88,7 @@ class ResponsePayloadTransformer
         $this->factory->setView($view);
         $this->payload->headers->set('Content-Type', 'text/html');
 
-        $viewPath = $this->controller->getLayoutPath();
+        $viewPath = $format == 'modal' ? $view->getBlock('content') : $this->controller->getLayoutPath();
 
         $response = $this->factory->view(
             $viewPath,
@@ -103,7 +104,7 @@ class ResponsePayloadTransformer
     protected function responseControllerMethod(): string
     {
         return $this->controller->getAction()
-            .Str::studly($this->payload->getFormat())
-            .'Response';
+            . Str::studly($this->payload->getFormat())
+            . 'Response';
     }
 }
