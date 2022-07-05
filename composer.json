@@ -31,8 +31,8 @@
     "bytic/http": "^0.9|^1.0",
     "bytic/inflector": "^0.9|^1.0",
     "bytic/utility": "^1.0",
-    "symfony/framework-bundle": "^4.0|^5.0",
-    "symfony/security-core": "^3.0|^4.0|^5.0"
+    "symfony/framework-bundle": "^4.0|^5.0|^6.0",
+    "symfony/security-core": "^3.0|^4.0|^5.0|^6.0"
   },
   "require-dev": {
     "bytic/phpqatools": "^1.0",
