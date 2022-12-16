@@ -1,24 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Response\ResponsePayload;
 
 use Nip\Controllers\Response\ResponsePayload;
 use Nip\Controllers\Tests\AbstractTest;
 
 /**
- * Class HasFormatTraitTest
- * @package Nip\Controllers\Tests\Response\ResponsePayload
+ * Class HasFormatTraitTest.
  */
 class HasFormatTraitTest extends AbstractTest
 {
-    public function test_getFormat()
+    public function testGetFormat()
     {
         $payload = new ResponsePayload();
 
-        self::assertSame(null, $payload->getFormat());
+        self::assertNull($payload->getFormat());
     }
 
-    public function test_getFormat_withDefaultFormat()
+    public function testGetFormatWithDefaultFormat()
     {
         $payload = new ResponsePayload();
         $payload->withDefaultFormat('html');

@@ -1,20 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Nip\Http\Request;
 
 /**
- * Trait RequestAwareTrait
- * @package Nip\Controllers\Traits
+ * Trait RequestAwareTrait.
  */
 trait RequestAwareTrait
 {
     use \Nip\Http\Request\RequestAwareTrait;
 
-    /**
-     * @param Request $request
-     */
     public function populateFromRequest(Request $request)
     {
         $this->setName($request->getControllerName());

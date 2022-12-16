@@ -1,12 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Events;
 
-use Closure;
-
 /**
- * Trait HasLifecycleTrait
- * @package Nip\Controllers\Traits
+ * Trait HasLifecycleTrait.
  */
 trait HasLifecycleTrait
 {
@@ -15,17 +14,13 @@ trait HasLifecycleTrait
      */
     protected $stages = [];
 
-    /**
-     * @param $stage
-     * @param callable $callback
-     */
     protected function on(string $stage, callable $callback)
     {
         $this->stage($stage)->add($callback);
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      */
     protected function onParseRequest(callable $callback)
     {
@@ -33,7 +28,7 @@ trait HasLifecycleTrait
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      */
     protected function before(callable $callback)
     {
@@ -41,16 +36,13 @@ trait HasLifecycleTrait
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      */
     protected function after(callable $callback)
     {
         $this->on('afterAction', $callback);
     }
 
-    /**
-     * @param string $stage
-     */
     protected function invokeStage(string $stage)
     {
         if (method_exists($this, $stage)) {
@@ -61,6 +53,7 @@ trait HasLifecycleTrait
 
     /**
      * @param string $name
+     *
      * @return StageCallbacks
      */
     protected function stage($name)
@@ -68,11 +61,11 @@ trait HasLifecycleTrait
         if (!isset($this->stages[$name])) {
             $this->stages[$name] = $this->generateStage($name);
         }
+
         return $this->stages[$name];
     }
 
     /**
-     * @param $name
      * @return StageCallbacks
      */
     protected function generateStage($name)

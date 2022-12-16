@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Fixtures\Controllers;
 
 use Nip\Controllers\Traits\BaseControllerTrait;
 
 /**
- * Class BaseControllerWithUtilityMethods
- * @package Nip\Controllers\Tests\Fixtures
+ * Class BaseControllerWithUtilityMethods.
  */
 class BaseControllerWithUtilityMethods
 {
@@ -23,12 +24,13 @@ class BaseControllerWithUtilityMethods
 
     /**
      * @param string $name
+     *
      * @return string
      */
     public function hello($name = '')
     {
         return 'hello'
-            .(!empty($name) ? ' '.$name : '');
+            . (!empty($name) ? ' ' . $name : '');
     }
 
     public function afterAction()

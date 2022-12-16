@@ -1,25 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Nip\Config\ConfigAwareTrait;
 use Nip\Controllers\Events\HasLifecycleTrait;
 
 /**
- * Trait BaseControllerTrait
- * @package Nip\Controllers\Trait
+ * Trait BaseControllerTrait.
  */
 trait BaseControllerTrait
 {
-    use NameWorksTrait;
-    use HasHelpersTrait;
-    use HasResponseTrait;
-    use ConfigAwareTrait;
-    use RequestAwareTrait;
     use ActionCallTrait;
-    use HasLifecycleTrait;
+    use ConfigAwareTrait;
     use DispatcherAwareTrait;
     use ErrorHandling;
-    use RedirectTrait;
+    use HasHelpersTrait;
+    use HasLifecycleTrait;
+    use HasResponseTrait;
     use HttpsTrait;
+    use NameWorksTrait;
+    use RedirectTrait;
+    use RequestAwareTrait;
 }

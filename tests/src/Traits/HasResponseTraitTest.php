@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Tests\AbstractTest;
@@ -9,12 +11,11 @@ use Nip\Http\Response\JsonResponse;
 use Nip\Http\Response\Response;
 
 /**
- * Class HasResponseTraitTest
- * @package Nip\Controllers\Tests\Traits
+ * Class HasResponseTraitTest.
  */
 class HasResponseTraitTest extends AbstractTest
 {
-    public function test_newResponse()
+    public function testNewResponse()
     {
         $controller = new ViewController();
         $controller->setName('base');
@@ -29,7 +30,7 @@ class HasResponseTraitTest extends AbstractTest
         self::assertStringContainsString('BASE-INDEX-CONTENT', $content);
     }
 
-    public function test_payload_set()
+    public function testPayloadSet()
     {
         $controller = new BaseController();
         $controller->setName('base');

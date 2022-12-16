@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Controller;
 use Nip\Controllers\Tests\AbstractTest;
 
 /**
- * Class ControllerHasHelpersTest
- * @package Nip\Tests\Helpers
+ * Class ControllerHasHelpersTest.
  */
 class ControllerHasHelpersTest extends AbstractTest
 {

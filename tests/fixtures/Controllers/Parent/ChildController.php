@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Fixtures\Controllers\Parent;
 
 use Nip\Controllers\Controller;
 
 /**
- * Class ChildController
- * @package Nip\Controllers\Tests\Fixtures\Controllers\Parent
+ * Class ChildController.
  */
 class ChildController extends Controller
 {

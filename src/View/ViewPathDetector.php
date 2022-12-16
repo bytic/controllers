@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\View;
 
 use Nip\Controllers\Utility\Path;
 use Nip\Utility\Traits\SingletonTrait;
 
 /**
- * Class ViewPathDetector
- * @package Nip\Controllers\View
+ * Class ViewPathDetector.
  */
 class ViewPathDetector
 {
@@ -27,7 +28,6 @@ class ViewPathDetector
     }
 
     /**
-     * @param $controller
      * @return bool
      */
     public static function for($controller)
@@ -36,7 +36,6 @@ class ViewPathDetector
     }
 
     /**
-     * @param $controller
      * @return bool
      */
     protected function detectForController($controller)
@@ -50,16 +49,14 @@ class ViewPathDetector
     }
 
     /**
-     * @param $controller
      * @return false|string
      */
     protected function keyForController($controller)
     {
-        return get_class($controller);
+        return \get_class($controller);
     }
 
     /**
-     * @param $controller
      * @return bool|string
      */
     protected function generateForController($controller)
@@ -68,7 +65,7 @@ class ViewPathDetector
             return $controller->generateViewPath();
         }
 
-        if (defined('MODULES_PATH')) {
+        if (\defined('MODULES_PATH')) {
             $path = MODULES_PATH . request()->getModuleName() . '/views/';
             if (is_dir($path)) {
                 return $path;
@@ -79,16 +76,16 @@ class ViewPathDetector
     }
 
     /**
-     * @param $controller
      * @return bool|string
      */
     protected function generateForControllerAutodetect($controller)
     {
-        $path = dirname(Path::basePath($controller));
-        $path .= DIRECTORY_SEPARATOR . 'views';
+        $path = \dirname(Path::basePath($controller));
+        $path .= \DIRECTORY_SEPARATOR . 'views';
         if (is_dir($path)) {
             return $path;
         }
+
         return false;
     }
 

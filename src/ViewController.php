@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers;
 
 use Nip\Controllers\Behaviours\RegistersViewPaths;
-use Nip\Controllers\Response\ResponsePayload;
 use Nip\Controllers\Traits\HasViewTrait;
 
 /**
- * Class ViewController
- * @package Nip\Controllers
+ * Class ViewController.
  */
 class ViewController extends Controller implements RegistersViewPaths
 {

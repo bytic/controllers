@@ -11,8 +11,7 @@ use Nip\Http\Response\Response;
 use Nip\Http\Response\ResponseAwareTrait;
 
 /**
- * Trait HasResponseTrait
- * @package Nip\Controllers\Traits
+ * Trait HasResponseTrait.
  */
 trait HasResponseTrait
 {
@@ -34,7 +33,7 @@ trait HasResponseTrait
      */
     protected function getResponseFactory(): ?ResponseFactory
     {
-        if ($this->responseFactory === null) {
+        if (null === $this->responseFactory) {
             $this->responseFactory = new ResponseFactory();
         }
 
@@ -46,16 +45,13 @@ trait HasResponseTrait
      */
     public function payload()
     {
-        if ($this->responsePayload === null) {
+        if (null === $this->responsePayload) {
             $this->responsePayload = $this->generateResponsePayload();
         }
 
         return $this->responsePayload;
     }
 
-    /**
-     * @return ResponsePayload
-     */
     protected function generateResponsePayload(): ResponsePayload
     {
         return ResponsePayload\ResponsePayloadFactory::fromController($this);

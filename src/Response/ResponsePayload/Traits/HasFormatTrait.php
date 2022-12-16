@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Nip\Controllers\Response\ResponsePayload\Traits;
 
 /**
- * Trait HasFormatTrait
- * @package Nip\Controllers\Response\ResponsePayload
+ * Trait HasFormatTrait.
  */
 trait HasFormatTrait
 {
-
     /**
      * @var string
      */
@@ -28,9 +26,6 @@ trait HasFormatTrait
         return $this;
     }
 
-    /**
-     * @param string|null $format
-     */
     public function withFormat(?string $format): void
     {
         $this->format = $format;
