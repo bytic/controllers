@@ -70,15 +70,16 @@ trait HasViewTrait
     {
         $request = $this->getRequest();
         if ($request instanceof Request) {
-            if (isset($request->_view) && $request->_view instanceof View) {
-                return $request->_view;
+            $viewRequest = $request->attributes->get('_view');
+            if ($viewRequest instanceof View) {
+                return $viewRequest;
             }
         }
 
         $view = $this->getViewObject();
 
         if ($request instanceof Request) {
-            $request->_view = $view;
+            $request->setAttribute('_view', $view);
         }
 
         return $view;
