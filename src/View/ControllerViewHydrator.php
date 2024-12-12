@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\View;
 
 use Nip\Controllers\Controller;
@@ -8,15 +10,14 @@ use Nip\Utility\Container;
 use Nip\View\View;
 
 /**
- * Class ControllerViewHydrator
- * @package Nip\Controllers\View
+ * Class ControllerViewHydrator.
  */
 class ControllerViewHydrator
 {
-
     /**
      * @param View $view
      * @param null $controller
+     *
      * @return mixed
      */
     public static function initContentBlocks($view, $controller = null)
@@ -30,8 +31,8 @@ class ControllerViewHydrator
     }
 
     /**
-     * @param $view
-     * @param null|Controller $controller
+     * @param Controller|null $controller
+     *
      * @return mixed
      */
     public static function initVars($view, $controller = null)
@@ -50,8 +51,8 @@ class ControllerViewHydrator
     }
 
     /**
-     * @param $view
      * @param void|Controller $controller
+     *
      * @return mixed
      */
     public static function populatePath($view, $controller = null)
@@ -61,8 +62,7 @@ class ControllerViewHydrator
             $view->setBasePath($path);
         }
 
-        if (method_exists($controller, 'registerViewPaths'))
-        {
+        if (method_exists($controller, 'registerViewPaths')) {
             $controller->registerViewPaths($view);
         }
 
@@ -70,7 +70,8 @@ class ControllerViewHydrator
     }
 
     /**
-     * @param null|Controller $controller
+     * @param Controller|null $controller
+     *
      * @return array|Request|\Nip\Request|string|null
      */
     protected static function detectRequest($controller = null)
@@ -78,12 +79,13 @@ class ControllerViewHydrator
         if ($controller instanceof Controller && $controller->hasRequest()) {
             return $controller->getRequest();
         }
-        if (function_exists('request') && Container::container()->has('request')) {
+        if (\function_exists('request') && Container::container()->has('request')) {
             $request = request();
             if ($request instanceof Request) {
                 return $request;
             }
         }
+
         return null;
     }
 }

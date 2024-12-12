@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\View;
 
 use Mockery\Mock;
@@ -9,12 +11,11 @@ use Nip\Controllers\View\ControllerViewHydrator;
 use Nip\View;
 
 /**
- * Class ControllerViewHydratorTest
- * @package Nip\Controllers\Tests\View
+ * Class ControllerViewHydratorTest.
  */
 class ControllerViewHydratorTest extends AbstractTest
 {
-    public function test_populatePath()
+    public function testPopulatePath()
     {
         $view = new View();
         $controller = new ViewController();
@@ -23,7 +24,7 @@ class ControllerViewHydratorTest extends AbstractTest
         self::assertStringStartsWith($controller->generateViewPath(), $view->getBasePath());
     }
 
-    public function test_initContentBlocks()
+    public function testInitContentBlocks()
     {
         /** @var View\View|Mock $view */
         $view = \Mockery::mock(View::class)->makePartial();

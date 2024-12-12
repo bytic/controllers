@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Fixtures\Controllers;
 
 use Nip\Controllers\Controller;
 
 /**
- * Class BaseControllerWithEvents
- * @package Nip\Controllers\Tests\Fixtures
+ * Class BaseControllerWithEvents.
  */
 class BaseControllerWithEvents extends Controller
 {
@@ -14,10 +15,10 @@ class BaseControllerWithEvents extends Controller
 
     public function __construct()
     {
-        parent:: __construct();
+        parent::__construct();
         $this->onParseRequest([$this, 'checkParseRequest']);
         $this->onParseRequest(function () {
-            $this->eventsTest['parseRequest']++;
+            ++$this->eventsTest['parseRequest'];
         });
     }
 
@@ -41,6 +42,6 @@ class BaseControllerWithEvents extends Controller
      */
     public function generateViewPath()
     {
-        return dirname(__DIR__) . '/views';
+        return \dirname(__DIR__) . '/views';
     }
 }

@@ -1,18 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Nip\Http\Request;
 
 /**
- * Trait HttpsTrait
- * @package Nip\Controllers\Traits
+ * Trait HttpsTrait.
  */
 trait HttpsTrait
 {
-    /**
-     * @param Request|null $request
-     */
     public function checkSecureRequest(Request $request = null)
     {
         if ($this->needsSecureRequest($request)) {
@@ -20,12 +18,9 @@ trait HttpsTrait
         }
     }
 
-    /**
-     * @param Request|null $request
-     */
     public function forceSecureRequest(Request $request = null)
     {
-        $request = $request ? $request : $this->getRequest();
+        $request = $request ?: $this->getRequest();
         if ($this->isSecureRequest($request)) {
             return;
         }
@@ -34,17 +29,17 @@ trait HttpsTrait
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function isSecureRequest(Request $request = null)
     {
-        $request = $request ? $request : $this->getRequest();
+        $request = $request ?: $this->getRequest();
 
         return $request->isSecure();
     }
 
     /**
-     * @param Request|null $request
      * @return bool
      */
     protected function needsSecureRequest(Request $request = null)

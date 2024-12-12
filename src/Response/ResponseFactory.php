@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Response;
 
 use Nip\Http\Response\JsonResponse;
@@ -9,8 +11,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
- * Class ResponseFactory
- * @package Nip\Controllers\Response
+ * Class ResponseFactory.
  */
 class ResponseFactory
 {
@@ -20,8 +21,8 @@ class ResponseFactory
      * Create a new response instance.
      *
      * @param string $content
-     * @param int $status
-     * @param array $headers
+     * @param int    $status
+     *
      * @return Response
      */
     public function make($content = '', $status = 200, array $headers = [])
@@ -32,8 +33,8 @@ class ResponseFactory
     /**
      * Create a new "no content" response.
      *
-     * @param  int  $status
-     * @param  array  $headers
+     * @param int $status
+     *
      * @return Response
      */
     public function noContent($status = Response::HTTP_NO_CONTENT, array $headers = [])
@@ -45,22 +46,22 @@ class ResponseFactory
      * Create a new JSON response instance.
      *
      * @param mixed $data
-     * @param int $status
-     * @param array $headers
-     * @param int $options
+     * @param int   $status
+     * @param int   $options
+     *
      * @return JsonResponse
      */
     public function json($data = [], $status = 200, array $headers = [], $options = 0)
     {
-        return new JsonResponse($data, $status, $headers, $options);
+        return new JsonResponse($data, $status, $headers, false);
     }
 
     /**
      * Create a new streamed response instance.
      *
      * @param \Closure $callback
-     * @param int $status
-     * @param array $headers
+     * @param int      $status
+     *
      * @return StreamedResponse
      */
     public function stream($callback, $status = 200, array $headers = [])
@@ -72,9 +73,6 @@ class ResponseFactory
      * Returns a BinaryFileResponse object with original or customized file name and disposition header.
      *
      * @param \SplFileInfo|string $file File object or path to file to be sent as response
-     * @param string|null $fileName
-     * @param string $disposition
-     * @return BinaryFileResponse
      */
     protected function file(
         $file,
@@ -92,6 +90,7 @@ class ResponseFactory
      * Convert the string to ASCII characters that are equivalent to the given name.
      *
      * @param string $name
+     *
      * @return string
      */
     protected function fallbackName($name)

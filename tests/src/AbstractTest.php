@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class AbstractTest
+ * Class AbstractTest.
  */
 abstract class AbstractTest extends TestCase
 {

@@ -7,8 +7,7 @@ namespace Nip\Controllers\Response\ResponsePayload\Traits;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
- * Trait HasHeadersTrait
- * @package Nip\Controllers\Response\ResponsePayload
+ * Trait HasHeadersTrait.
  */
 trait HasHeadersTrait
 {

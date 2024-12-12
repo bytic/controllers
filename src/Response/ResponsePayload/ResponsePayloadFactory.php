@@ -6,24 +6,18 @@ namespace Nip\Controllers\Response\ResponsePayload;
 
 use Nip\Controllers\Response\ResponsePayload;
 
-/**
- *
- */
 class ResponsePayloadFactory
 {
     protected $controller = null;
     protected $request = null;
     protected ?ResponsePayload $payload = null;
 
-    /**
-     * @param $controller
-     * @return ResponsePayload
-     */
     public static function fromController($controller): ResponsePayload
     {
         $factory = new self();
         $factory->controller = $controller;
         $factory->request = $controller->getRequest();
+
         return $factory->create();
     }
 
@@ -32,6 +26,7 @@ class ResponsePayloadFactory
         $this->payload = $this->new();
         $this->checkDefault();
         $this->checkRequestQuery();
+
         return $this->payload;
     }
 

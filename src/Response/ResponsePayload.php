@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Nip\Controllers\Response;
 
-use ArrayAccess;
-
 /**
- * Class ResponsePayload
- * @package Nip\Controllers\Response
+ * Class ResponsePayload.
  */
-class ResponsePayload implements ArrayAccess
+class ResponsePayload implements \ArrayAccess
 {
-    public const REQUEST_PARAM_FORMAT = '_format';
-
     use ResponsePayload\Traits\HasDataTrait;
     use ResponsePayload\Traits\HasFormatTrait;
     use ResponsePayload\Traits\HasHeadersTrait;
+    public const REQUEST_PARAM_FORMAT = '_format';
 
     /**
      * ResponsePayload constructor.

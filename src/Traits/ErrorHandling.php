@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Trait ErrorHandling
- * @package Nip\Controllers\Traits
+ * Trait ErrorHandling.
  */
 trait ErrorHandling
 {

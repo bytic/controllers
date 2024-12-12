@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Traits;
 
 use Nip\Controllers\Tests\AbstractTest;
@@ -7,8 +9,7 @@ use Nip\Controllers\Tests\Fixtures\Controllers\BaseControllerWithUtilityMethods;
 use Nip\Http\Response\Response;
 
 /**
- * Class ControllerActionCallTest
- * @package Nip\Controllers\Tests\Traits
+ * Class ControllerActionCallTest.
  */
 class ControllerActionCallTest extends AbstractTest
 {

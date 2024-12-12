@@ -7,8 +7,7 @@ namespace Nip\Controllers\Response\ResponsePayload\Traits;
 use Nip\Controllers\Response\ResponseData;
 
 /**
- * Trait HasDataTrait
- * @package Nip\Controllers\Response\ResponsePayload
+ * Trait HasDataTrait.
  */
 trait HasDataTrait
 {
@@ -18,7 +17,7 @@ trait HasDataTrait
     public $data;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function offsetExists($offset): bool
     {
@@ -26,7 +25,7 @@ trait HasDataTrait
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function offsetGet(mixed $offset): mixed
     {
@@ -34,7 +33,7 @@ trait HasDataTrait
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
@@ -42,7 +41,7 @@ trait HasDataTrait
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function offsetUnset(mixed $offset): void
     {
@@ -50,7 +49,6 @@ trait HasDataTrait
     }
 
     /**
-     * @param string $key
      * @return mixed|null
      */
     public function __get(string $key)
@@ -58,19 +56,11 @@ trait HasDataTrait
         return $this->data->get($key);
     }
 
-    /**
-     * @param $name
-     * @param $value
-     */
     public function __set($name, $value)
     {
         $this->data->set($name, $value);
     }
 
-    /**
-     * @param $name
-     * @param $value
-     */
     public function set($name, $value)
     {
         $this->data->set($name, $value);
@@ -78,11 +68,10 @@ trait HasDataTrait
 
     /**
      * @param $name
-     * @param $value
      */
     public function with($key, $value = null)
     {
-        $data = is_array($key) ? $key : [$key => $value];
+        $data = \is_array($key) ? $key : [$key => $value];
 
         foreach ($data as $key => $value) {
             $this->set($key, $value);

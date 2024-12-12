@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Tests\Utility;
 
 use Nip\Controllers\Tests\AbstractTest;
@@ -8,17 +10,14 @@ use Nip\Controllers\Tests\Fixtures\Controllers\Parent\ChildController;
 use Nip\Controllers\Utility\Path;
 
 /**
- * Class PathTest
- * @package Nip\Controllers\Tests\Utility
+ * Class PathTest.
  */
 class PathTest extends AbstractTest
 {
     /**
      * @dataProvider data_basePath
-     * @param $controller
-     * @param $path
      */
-    public function test_basePath($controller, $path)
+    public function testBasePath($controller, $path)
     {
         self::assertSame($path, Path::basePath($controller));
     }
@@ -28,7 +27,8 @@ class PathTest extends AbstractTest
      */
     public function data_basePath()
     {
-        $path = TEST_FIXTURE_PATH . DIRECTORY_SEPARATOR . 'Controllers';
+        $path = TEST_FIXTURE_PATH . \DIRECTORY_SEPARATOR . 'Controllers';
+
         return [
             [BaseController::class, $path],
             [ChildController::class, $path],

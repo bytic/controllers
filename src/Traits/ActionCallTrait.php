@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Nip\Dispatcher\Resolver\ClassResolver\NameFormatter;
@@ -8,8 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Trait ActionCallTrait
- * @package Nip\Controllers\Traits
+ * Trait ActionCallTrait.
  */
 trait ActionCallTrait
 {
@@ -28,8 +29,9 @@ trait ActionCallTrait
     }
 
     /**
-     * @param bool $method
+     * @param bool  $method
      * @param array $parameters
+     *
      * @return ResponseInterface
      */
     public function callAction($method = false, $parameters = [])
@@ -40,18 +42,16 @@ trait ActionCallTrait
 
                 return $this->runAction($method, $parameters);
             } else {
-                throw new NotFoundHttpException(
-                    'Controller method ['.$method.'] not found for '.get_class($this)
-                );
+                throw new NotFoundHttpException('Controller method [' . $method . '] not found for ' . static::class);
             }
         }
 
-        throw new NotFoundHttpException('No action specified for '.get_class($this));
+        throw new NotFoundHttpException('No action specified for ' . static::class);
     }
 
     /**
-     * @param $method
      * @param array $parameters
+     *
      * @return ResponseInterface
      */
     protected function runAction($method, $parameters = [])
@@ -59,7 +59,7 @@ trait ActionCallTrait
         $this->invokeStage('parseRequest');
         $this->invokeStage('beforeAction');
 
-        $response = call_user_func_array([$this, $method], $parameters);
+        $response = \call_user_func_array([$this, $method], $parameters);
 
         if ($response instanceof ResponseInterface) {
             $this->setResponse($response);
@@ -75,12 +75,11 @@ trait ActionCallTrait
     }
 
     /**
-     * @param $action
      * @return bool
      */
     protected function validAction($action)
     {
-        return in_array($action, get_class_methods(get_class($this)));
+        return \in_array($action, get_class_methods(static::class));
     }
 
     /**
@@ -93,6 +92,7 @@ trait ActionCallTrait
 
     /**
      * @param string $action
+     *
      * @return self
      */
     public function setAction($action)

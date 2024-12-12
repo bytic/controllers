@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers;
 
 use Nip\Controllers\Traits\BaseControllerTrait;
 use Nip\Utility\Traits\CanBootTraitsTrait;
 
 /**
- * Class Controller
- * @package Nip
+ * Class Controller.
  */
 class Controller
 {
@@ -24,8 +25,6 @@ class Controller
     }
 
     /**
-     * @param $name
-     * @param $arguments
      * @return bool|mixed
      */
     public function __call($name, $arguments)
@@ -34,9 +33,8 @@ class Controller
             return $this->getHelper($name);
         }
 
-        return trigger_error("Call to undefined method [$name] in controller [{$this->getClassName()}]", E_USER_ERROR);
+        return trigger_error("Call to undefined method [$name] in controller [{$this->getClassName()}]", \E_USER_ERROR);
     }
-
 
     /**
      * @return string

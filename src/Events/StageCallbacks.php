@@ -1,18 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Events;
 
-use Bytic\Scheduler\Runner\Invoker;
 use Closure;
 
 /**
- * Class StageCallbacks
- * @package Nip\Controllers\Lifecycle
+ * Class StageCallbacks.
  */
 class StageCallbacks
 {
     /**
-     * The array of callbacks to be run
+     * The array of callbacks to be run.
      *
      * @var array
      */
@@ -21,12 +21,14 @@ class StageCallbacks
     /**
      * Register a callback to be called before the operation.
      *
-     * @param Closure $callback
+     * @param \Closure $callback
+     *
      * @return $this
      */
     public function add(callable $callback)
     {
         $this->callbacks[] = $callback;
+
         return $this;
     }
 
@@ -44,6 +46,7 @@ class StageCallbacks
             // Invoke the callback with buffering enabled
             $output .= \call_user_func_array($callback, []);
         }
+
         return $output;
     }
 }

@@ -13,8 +13,7 @@ use Nip\Http\Response\Response;
 use Nip\Utility\Str;
 
 /**
- * Class ResponsePayloadTransformer
- * @package Nip\Controllers\Response
+ * Class ResponsePayloadTransformer.
  */
 class ResponsePayloadTransformer
 {
@@ -28,7 +27,7 @@ class ResponsePayloadTransformer
 
     /**
      * @param Controller|HasResponseTrait $controller
-     * @param ResponsePayload $payload
+     *
      * @return Response
      */
     public static function make($controller, ResponsePayload $payload)
@@ -40,8 +39,8 @@ class ResponsePayloadTransformer
 
     /**
      * ResponsePayloadTransformer constructor.
+     *
      * @param Controller $controller
-     * @param ResponsePayload $payload
      */
     protected function __construct($controller, ResponsePayload $payload)
     {
@@ -51,7 +50,6 @@ class ResponsePayloadTransformer
         $this->factory = new ResponseFactory();
     }
 
-
     /**
      * @return Response|JsonResponse
      */
@@ -59,7 +57,7 @@ class ResponsePayloadTransformer
     {
         $controllerMethod = $this->responseControllerMethod();
         if (method_exists($this->controller, $controllerMethod)) {
-            return call_user_func_array([$this->controller, $controllerMethod], [$this->factory, $this->payload]);
+            return \call_user_func_array([$this->controller, $controllerMethod], [$this->factory, $this->payload]);
         }
         $format = $this->payload->getFormat();
         switch ($format) {
@@ -74,9 +72,6 @@ class ResponsePayloadTransformer
         return $this->factory->noContent();
     }
 
-    /**
-     * @return Response
-     */
     protected function toViewResponse($format): Response
     {
         $view = $this->controller->getView();
@@ -88,7 +83,7 @@ class ResponsePayloadTransformer
         $this->factory->setView($view);
         $this->payload->headers->set('Content-Type', 'text/html');
 
-        $viewPath = $format == 'modal' ? '/' . trim($view->getBlock('content'), '/') : $this->controller->getLayoutPath(
+        $viewPath = 'modal' == $format ? '/' . trim($view->getBlock('content'), '/') : $this->controller->getLayoutPath(
         );
 
         $response = $this->factory->view(
@@ -99,6 +94,7 @@ class ResponsePayloadTransformer
         );
 
         $response->setCharset('utf-8');
+
         return $response;
     }
 

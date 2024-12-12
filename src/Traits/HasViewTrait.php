@@ -9,8 +9,7 @@ use Nip\Http\Request;
 use Nip\View;
 
 /**
- * Trait HasViewTrait
- * @package Nip\Controllers\Traits
+ * Trait HasViewTrait.
  */
 trait HasViewTrait
 {
@@ -28,6 +27,7 @@ trait HasViewTrait
 
     /**
      * @param bool $return
+     *
      * @return bool|string|null
      */
     public function loadView($return = false)
@@ -35,10 +35,11 @@ trait HasViewTrait
         $view = $this->getView();
         $this->populateView($view);
         $content = $view->load($this->getLayoutPath());
-        if ($return == true) {
+        if (true == $return) {
             return $content;
         }
         echo $content;
+
         return null;
     }
 
@@ -69,15 +70,16 @@ trait HasViewTrait
     {
         $request = $this->getRequest();
         if ($request instanceof Request) {
-            if (isset($request->_view) && $request->_view instanceof View) {
-                return $request->_view;
+            $viewRequest = $request->attributes->get('_view');
+            if ($viewRequest instanceof View) {
+                return $viewRequest;
             }
         }
 
         $view = $this->getViewObject();
 
         if ($request instanceof Request) {
-            $request->_view = $view;
+            $request->setAttribute('_view', $view);
         }
 
         return $view;

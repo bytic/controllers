@@ -1,20 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Controllers\Traits;
 
 use Nip\Utility\Traits\NameWorksTrait as UtilityNameWorksTrait;
 
 /**
- * Trait NameWorksTrait
- * @package Nip\Controllers\Traits
+ * Trait NameWorksTrait.
  */
 trait NameWorksTrait
 {
+    use UtilityNameWorksTrait;
     protected $fullName = null;
 
     protected $name = null;
-
-    use UtilityNameWorksTrait;
 
 //    protected function inflectName()
 //    {
@@ -27,16 +27,15 @@ trait NameWorksTrait
      */
     public function getClassName()
     {
-        return str_replace("Controller", "", get_class($this));
+        return str_replace('Controller', '', static::class);
     }
-
 
     /**
      * @return string
      */
     public function getName()
     {
-        if ($this->name === null) {
+        if (null === $this->name) {
             $this->initName();
         }
 
@@ -65,6 +64,7 @@ trait NameWorksTrait
             return $this->getRequest()->getControllerName();
         }
         $class = $this->getClassFirstName();
+
         return str_replace('Controller', '', $class);
     }
 
@@ -73,7 +73,7 @@ trait NameWorksTrait
      */
     public function getFullName()
     {
-        if ($this->fullName === null) {
+        if (null === $this->fullName) {
             $this->fullName = inflector()->unclassify($this->getClassName());
         }
 
