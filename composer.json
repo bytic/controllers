@@ -28,6 +28,22 @@
     "bytic/dispatcher": "^1.0|^2.0",
     "bytic/view": "^1.0|^2.0"
   },
+  "autoload": {
+    "psr-4": {
+      "Nip\\Controllers\\": "src"
+    },
+    "classmap": [
+      "./legacy"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nip\\Controllers\\Tests\\": "tests/src",
+      "Nip\\Controllers\\Tests\\Fixtures\\": "tests/fixtures"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
