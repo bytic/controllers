@@ -27,7 +27,7 @@ trait HasDataTrait
     /**
      * {@inheritDoc}
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->data->get($offset);
     }
@@ -35,7 +35,7 @@ trait HasDataTrait
     /**
      * {@inheritDoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->set($offset, $value);
     }
@@ -43,7 +43,7 @@ trait HasDataTrait
     /**
      * {@inheritDoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->data->unset($offset);
     }
