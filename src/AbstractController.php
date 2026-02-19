@@ -171,7 +171,7 @@ abstract class AbstractController extends Controller
     protected function isGranted(mixed $attribute, mixed $subject = null): bool
     {
         if (!function_exists('app') || !app()->has('security.authorization_checker')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".');
+            throw new \LogicException('Security authorization checker is not available. Register a "security.authorization_checker" service in your application container.');
         }
 
         return app('security.authorization_checker')->isGranted($attribute, $subject);
@@ -196,6 +196,7 @@ abstract class AbstractController extends Controller
     ): void {
         if (!$this->isGranted($attribute, $subject)) {
             $exception = $this->createAccessDeniedException($message);
+            // setAttributes and setSubject methods available in Symfony Security 5.0+
             if (method_exists($exception, 'setAttributes')) {
                 $exception->setAttributes([$attribute]);
             }
@@ -210,14 +211,14 @@ abstract class AbstractController extends Controller
     /**
      * Get a user from the Security Token Storage.
      *
-     * @return mixed|null
+     * @return mixed|null Returns the user object or null if not authenticated
      *
      * @throws \LogicException If SecurityBundle is not available
      */
     protected function getUser(): mixed
     {
         if (!function_exists('app') || !app()->has('security.token_storage')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".');
+            throw new \LogicException('Security token storage is not available. Register a "security.token_storage" service in your application container.');
         }
 
         $token = app('security.token_storage')->getToken();
@@ -297,7 +298,7 @@ abstract class AbstractController extends Controller
     protected function isCsrfTokenValid(string $id, ?string $token): bool
     {
         if (!function_exists('app') || !app()->has('security.csrf.token_manager')) {
-            throw new \LogicException('CSRF protection is not enabled in your application. Enable it with the "csrf_protection" key in "config/packages/framework.yaml".');
+            throw new \LogicException('CSRF protection is not enabled. Register a "security.csrf.token_manager" service in your application container.');
         }
 
         return app('security.csrf.token_manager')->isTokenValid(
@@ -319,7 +320,7 @@ abstract class AbstractController extends Controller
     protected function createForm(string $type, mixed $data = null, array $options = []): mixed
     {
         if (!function_exists('app') || !app()->has('form.factory')) {
-            throw new \LogicException('Forms are not enabled in your application. Try running "composer require symfony/form".');
+            throw new \LogicException('Form factory is not available. Register a "form.factory" service in your application container.');
         }
 
         return app('form.factory')->create($type, $data, $options);
@@ -338,7 +339,7 @@ abstract class AbstractController extends Controller
     protected function createFormBuilder(mixed $data = null, array $options = []): mixed
     {
         if (!function_exists('app') || !app()->has('form.factory')) {
-            throw new \LogicException('Forms are not enabled in your application. Try running "composer require symfony/form".');
+            throw new \LogicException('Form factory is not available. Register a "form.factory" service in your application container.');
         }
 
         return app('form.factory')->createBuilder(
