@@ -11,3 +11,13 @@ ByTIC Controller component
 [![Quality Score](https://img.shields.io/scrutinizer/g/bytic/controllers.svg?style=flat-square)](https://scrutinizer-ci.com/g/bytic/controllers)
 [![StyleCI](https://styleci.io/repos/119902214/shield?branch=master)](https://styleci.io/repos/119902214)
 [![Total Downloads](https://img.shields.io/packagist/dt/bytic/controllers.svg?style=flat-square)](https://packagist.org/packages/bytic/controllers)
+
+## Symfony Compatibility
+
+This package now includes **Symfony-compatible controller methods** through the `AbstractController` class, making it easier to write Symfony-style code while maintaining backwards compatibility.
+
+See [SYMFONY_COMPATIBILITY.md](SYMFONY_COMPATIBILITY.md) for detailed documentation on:
+- Using Symfony-style methods (`json()`, `render()`, `redirectToRoute()`, etc.)
+- Migration guide from `Controller` to `AbstractController`
+- Security, forms, and flash message handling
+- Differences from Symfony and future migration path
